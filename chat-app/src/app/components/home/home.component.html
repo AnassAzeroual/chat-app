@@ -1,0 +1,78 @@
+<div class="container clearfix">
+    <div class="people-list" id="people-list">
+      <div class="search">
+        <input type="text" placeholder="search" />
+        <i class="fa fa-search"></i>
+      </div>
+      <ul class="list">
+        <div *ngFor="let user of listUsers" >
+
+          <li class="clearfix" (click)="selectedUser(user)" *ngIf="user.id != my_id">
+            <img [src]="user.img" alt="avatar" />
+            <div class="about">
+              <div class="name">{{user.name}}</div>
+              <div class="status" [hidden]="!user.status">
+                <i class="fa fa-circle online"></i> online 
+              </div>
+            </div>
+          </li>
+          
+        </div>
+      </ul>
+
+    </div>
+    
+    <div class="chat">
+      <div class="chat-header clearfix">
+      <img src="{{client_avatar}}" alt="avatar" style="border-radius: 50%;" />
+        
+        <div class="chat-about">
+          <div class="chat-with">{{client_name}}</div>
+          <div class="chat-num-messages">already 1 902 messages</div>
+        </div>
+        <i class="fa fa-star"></i>
+      </div> <!-- end chat-header -->
+      
+      <div class="chat-history" id="zoneChat">
+        <ul>
+          <div *ngFor="let message of ListeMessages">
+            expediteur {{ message.expediteur}} mon_id {{ message.mon_id}} 
+            <li class="clearfix" *ngIf="message.expediteur != message.mon_id">
+              <div class="message-data align-right">
+                <!-- <span class="message-data-time" >{{ message.date}}</span> &nbsp; &nbsp; -->
+                <span class="message-data-name" >{{client_name}}</span> <i class="fa fa-circle me"></i>
+                
+              </div>
+              <div class="message other-message float-right">
+                {{ message.contenu_message}}
+              </div>
+            </li>
+          
+            <li *ngIf="message.expediteur == message.mon_id">
+              <div class="message-data">
+                <span class="message-data-name"><i class="fa fa-circle online"></i> Moi</span>
+                <!-- <span class="message-data-time">{{ message.date}}</span> -->
+              </div>
+              <div class="message my-message">
+                {{ message.contenu_message}}
+              </div>
+            </li>
+
+         </div>
+          
+        </ul>
+        
+      </div> <!-- end chat-history -->
+      
+      <div class="chat-message clearfix">
+        <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3" [(ngModel)]="messageValue"></textarea>
+        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+        <i class="fa fa-file-image-o"></i>
+        
+        <button (click)="sendMessage()">Send</button>
+
+      </div> <!-- end chat-message -->
+      
+    </div> <!-- end chat -->
+    
+  </div> <!-- end container -->
