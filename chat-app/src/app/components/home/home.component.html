@@ -1,10 +1,16 @@
 <div class="container clearfix">
+
+<!-- ----------------------------------------------------------------------- -->
+<!--                             List users chat                             -->
+<!-- ----------------------------------------------------------------------- -->
+
     <div class="people-list" id="people-list">
       <div class="search">
         <input type="text" placeholder="search" />
         <i class="fa fa-search"></i>
       </div>
       <ul class="list">
+        
         <div *ngFor="let user of listUsers" >
 
           <li class="clearfix" (click)="selectedUser(user)" *ngIf="user.id != my_id">
@@ -21,7 +27,11 @@
       </ul>
 
     </div>
-    
+
+<!-- ----------------------------------------------------------------------- -->
+<!--                       List messages and send box                        -->
+<!-- ----------------------------------------------------------------------- -->
+
     <div class="chat">
       <div class="chat-header clearfix">
       <img src="{{client_avatar}}" alt="avatar" style="border-radius: 50%;" />
@@ -36,7 +46,6 @@
       <div class="chat-history" id="zoneChat">
         <ul>
           <div *ngFor="let message of ListeMessages">
-            expediteur {{ message.expediteur}} mon_id {{ message.mon_id}} 
             <li class="clearfix" *ngIf="message.expediteur != message.mon_id">
               <div class="message-data align-right">
                 <!-- <span class="message-data-time" >{{ message.date}}</span> &nbsp; &nbsp; -->
