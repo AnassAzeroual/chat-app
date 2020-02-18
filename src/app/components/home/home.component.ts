@@ -114,12 +114,15 @@ export class HomeComponent implements OnInit {
         date_creation:    new Date().toISOString().slice(0, 23)
       }
             
-      this.ListeMessages.push(body);
-    if (this.connect.sendMessage(data)) {
-      console.log("sended");
-    } else {
-      console.log("Not sended");
-    }
+      if (this.connect.sendMessage(data)) {
+        this.ListeMessages.push(body);
+        console.log("sended");
+      } else {
+        body.contenu_message = `${body.contenu_message}⛔`
+        this.ListeMessages.push(body);
+        console.log("Not sended");
+      }
+      this.messageValue = ""
   }
 
   scroll() {

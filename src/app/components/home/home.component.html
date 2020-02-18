@@ -36,7 +36,7 @@
       <div class="chat-history" id="zoneChat">
         <ul>
           <div *ngFor="let message of ListeMessages">
-            expediteur {{ message.expediteur}} mon_id {{ message.mon_id}} 
+            <!-- expediteur {{ message.expediteur}} mon_id {{ message.mon_id}}  -->
             <li class="clearfix" *ngIf="message.expediteur != message.mon_id">
               <div class="message-data align-right">
                 <!-- <span class="message-data-time" >{{ message.date}}</span> &nbsp; &nbsp; -->
@@ -65,7 +65,10 @@
       </div> <!-- end chat-history -->
       
       <div class="chat-message clearfix">
-        <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3" [(ngModel)]="messageValue"></textarea>
+        <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"
+          [(ngModel)]="messageValue"
+          (keyup.enter)="sendMessage()"
+        ></textarea>
         <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
         <i class="fa fa-file-image-o"></i>
         
