@@ -8,7 +8,7 @@ import { Observable, Subscriber } from 'rxjs';
 })
 
 export class ConnectService {
-  readonly uri: string = 'ws://localhost:3000';
+  readonly uri: string = 'ws://localhost:4000';
   private socket: any;
   public response: boolean;
 
@@ -17,45 +17,40 @@ export class ConnectService {
   }
 
 
-  sendMessage(data)
-    {
-      console.log("sendMessage");
-      console.log(data);
-      
-      if(this.socket.connected==true)
-      {
-        this.socket.emit('message',data);
-        this.response=true;
-      }
-  
-      else
-      {
-        this.response=false;
-      }
-  
-      return this.response;
+  sendMessage(data) {
+    console.log("sendMessage");
+    console.log(data);
+
+    if (this.socket.connected == true) {
+      this.socket.emit('message', data);
+      this.response = true;
     }
 
-
-    joinRoom(data)
-    {
-      this.socket.emit('join',data);
+    else {
+      this.response = false;
     }
 
-    leaveRoom(data)
-    {
-        this.socket.emit('leave',data);
-    }
+    return this.response;
+  }
 
-    getMessages(){
-        let observable = new Observable<{user:String,host_id:String, message:String,room:String}>(observer=>{
-            this.socket.on('new message', (data)=>{
-                observer.next(data);
-            });
-            return () => {this.socket.disconnect();}
-        });
 
-        return observable;
-    }
+  joinRoom(data) {
+    this.socket.emit('join', data);
+  }
+
+  leaveRoom(data) {
+    this.socket.emit('leave', data);
+  }
+
+  getMessages() {
+    let observable = new Observable<{ user: String, host_id: String, message: String, room: String }>(observer => {
+      this.socket.on('new message', (data) => {
+        observer.next(data);
+      });
+      return () => { this.socket.disconnect(); }
+    });
+
+    return observable;
+  }
 
 }
